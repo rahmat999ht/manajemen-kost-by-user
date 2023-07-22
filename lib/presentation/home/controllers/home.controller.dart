@@ -34,7 +34,6 @@ class HomeController extends GetxController with StateMixin<NaiveBayesModel> {
 
   List<NaiveBayesModel> listNaiveBayes = [];
   // NaiveBayesModel? naiveBayesModel = null;
-
   Stream<QuerySnapshot<Map<String, dynamic>>> get penghuniStream =>
       ConstansApp.firebaseFirestore
           .collection(ConstansApp.naiveBayesCollection)
@@ -51,10 +50,10 @@ class HomeController extends GetxController with StateMixin<NaiveBayesModel> {
           final data = event.docs[index];
           log("data jatuh tempo ${data.data()}");
           return NaiveBayesModel.fromDocumentSnapshot(data);
-        });
+        }); 
         log("naive bayes ${listNaiveBayes.length}");
         final listWhere = listNaiveBayes.firstWhere(
-          (e) => e.idKamar!.id == "07 A",
+          (e) => e.idKamar!.id == ConstansApp.idKamarLogin,
         );
         log("listWhere $listWhere");
         change(listWhere, status: RxStatus.success());

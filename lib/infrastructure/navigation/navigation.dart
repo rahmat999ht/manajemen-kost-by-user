@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:get/get.dart';
 
 import '../../config.dart';
@@ -69,6 +70,21 @@ class Nav {
       name: Routes.FORM_PEMBAYARAN,
       page: () => const FormPembayaranScreen(),
       binding: FormPembayaranControllerBinding(),
+    ),
+    GetPage(
+      name: Routes.LIST_PEMBAYARAN,
+      page: () => const ListPembayaranScreen(),
+      binding: ListPembayaranControllerBinding(),
+    ),
+    GetPage(
+      name: Routes.TENTANG_APP,
+      page: () => const TentangAppScreen(),
+      binding: TentangAppControllerBinding(),
+    ),
+    GetPage(
+      name: Routes.PEMBERITAHUAN,
+      page: () => const PemberitahuanScreen(),
+      binding: PemberitahuanControllerBinding(),
     ),
   ];
 }

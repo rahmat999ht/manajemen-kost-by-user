@@ -1,22 +1,42 @@
-import 'package:flutter/material.dart';
-
-import 'package:get/get.dart';
-
-import 'controllers/profile_update.controller.dart';
+import '../../domain/core/core.dart';
 
 class ProfileUpdateScreen extends GetView<ProfileUpdateController> {
   const ProfileUpdateScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    Get.lazyPut<ImageProfileUpdateController>(
+      () => ImageProfileUpdateController(),
+    );
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('ProfileUpdateScreen'),
-        centerTitle: true,
-      ),
-      body: const Center(
-        child: Text(
-          'ProfileUpdateScreen is working',
-          style: TextStyle(fontSize: 20),
+      backgroundColor: ColorApp.white,
+      appBar: appBarBatal('Edit profil', Get.back),
+      body: SingleChildScrollView(
+        child: SizedBox(
+          height: Get.height,
+          child: Form(
+            key: controller.formKey,
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                children: [
+                  SizeApp.h36,
+                  WrapperImageUpdateProfil(
+                    image: controller.penghuniModel.image,
+                  ),
+                  SizeApp.h36,
+                  const ListFormProfilUpdate(),
+                  SizeApp.h50,
+                  Obx(
+                    () => ButtonPrymary.isBlack(
+                      isLoading: controller.isLoading.value,
+                      text: 'Simpan',
+                      onPressed: controller.updateProfil,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ),
       ),
     );

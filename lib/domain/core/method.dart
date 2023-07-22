@@ -73,6 +73,19 @@ class MethodApp {
         .add(data!);
   }
 
+   void updatePemberitahuanById({
+    String? id,
+    Map<String, dynamic>? data,
+  }) {
+    ConstansApp.firebaseFirestore
+        .collection(ConstansApp.pemberitahuanCollection)
+        .doc(id)
+        .update(
+          data!,
+        );
+  }
+
+
   DocumentReference<PenghuniModel> penghuni(String idUser) {
     return ConstansApp.firebaseFirestore
         .collection(ConstansApp.penghuniCollection)
@@ -124,10 +137,12 @@ class MethodApp {
     File file,
     String uniqName, {
     bool pemasukan = true,
+    bool profil = false,
   }) async {
     final String folder = pemasukan == true ? 'pemasukan' : 'pengeluaran';
+    final String initFolder = profil == true ? 'profil' : folder;
     final uploadTask =
-        await ConstansApp.storageRef.child("$folder/$uniqName.jpg").putFile(
+        await ConstansApp.storageRef.child("$initFolder/$uniqName.jpg").putFile(
               file,
               ConstansApp.metadata,
             );

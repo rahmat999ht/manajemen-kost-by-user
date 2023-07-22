@@ -2,7 +2,7 @@ import 'package:manajemen_kost_by_user/presentation/home/components/card_contact
 
 import '../../../domain/core/core.dart';
 
-Future callBy(String? noHp) async {
+Future callByAlert(String? noHp) async {
   MethodApp methodApp = MethodApp();
   return await alertContent(
       title: "Hubungi Lewat",

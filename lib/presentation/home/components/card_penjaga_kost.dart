@@ -73,7 +73,7 @@ class CardPenjagaKost extends StatelessWidget {
             const Spacer(),
             GestureDetector(
               onTap: () async {
-                await callBy(
+                await callByAlert(
                   adminModel?.noHp,
                 );
               },

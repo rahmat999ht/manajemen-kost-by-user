@@ -10,7 +10,9 @@ class ConstansApp {
   static const naiveBayesCollection = "naive_bayes";
   static const pemasukanCollection = "pemasukan";
   static const pengeluaranCollection = "pengeluaran";
+  static const pemberitahuanCollection = "pemberitahuan";
   static final idLogin = Get.find<DashboardController>().penghuniModel!.id!;
+  static final idKamarLogin = Get.find<KamarController>().idKamarLogin;
 
   static final storageRef = FirebaseStorage.instance.ref();
 

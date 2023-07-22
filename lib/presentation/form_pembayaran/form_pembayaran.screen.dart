@@ -1,22 +1,41 @@
-import 'package:flutter/material.dart';
-
-import 'package:get/get.dart';
-
-import 'controllers/form_pembayaran.controller.dart';
+import '../../domain/core/core.dart';
+import 'components/image_wrapper_pemasukan.dart';
+import 'components/list_form.dart';
+import 'controllers/image_pemasukan.controller.dart';
 
 class FormPembayaranScreen extends GetView<FormPembayaranController> {
   const FormPembayaranScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    Get.lazyPut(() => ImagesPembayaranController());
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('FormPembayaranScreen'),
-        centerTitle: true,
+      backgroundColor: ColorApp.white,
+      appBar: appBarBatal(
+        'Pembayaran',
+        Get.back,
       ),
-      body: const Center(
-        child: Text(
-          'FormPembayaranScreen is working',
-          style: TextStyle(fontSize: 20),
+      body: Padding(
+        padding: const EdgeInsets.all(18.0),
+        child: Form(
+          key: controller.formKey,
+          child: const Column(
+            children: [
+              FormPemasukan(),
+              WrapperImagePickerPembayaran(),
+              Spacer(),
+            ],
+          ),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: Obx(
+        () => Padding(
+          padding: const EdgeInsets.all(18.0),
+          child: ButtonPrymary.isBlack(
+            isLoading: controller.loading.value,
+            text: 'Simpan',
+            onPressed: controller.addPemasukan,
+          ),
         ),
       ),
     );

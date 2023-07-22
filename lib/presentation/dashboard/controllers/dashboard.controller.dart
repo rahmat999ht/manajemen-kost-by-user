@@ -20,6 +20,7 @@ class DashboardController extends GetxController
     final prefs = await SharedPreferences.getInstance();
     String? isId = prefs.getString("user_id") ?? '';
     log(isId, name: 'user_id');
+
     final dataAllUser = await ConstansApp.firebaseFirestore
         .collection(ConstansApp.penghuniCollection)
         .get();

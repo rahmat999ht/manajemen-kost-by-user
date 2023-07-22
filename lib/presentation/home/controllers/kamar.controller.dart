@@ -5,6 +5,7 @@ import '/domain/core/core.dart';
 class KamarController extends GetxController with StateMixin<List<KamarModel>> {
   List<KamarModel> listKamarModel = [];
   List<KamarModel> listKamarKosong = [];
+  String? idKamarLogin = '';
 
   void onChange(String value, RxBool isSearch) {
     value.isEmpty ? isSearch.value = false : isSearch.value = true;
@@ -38,6 +39,15 @@ class KamarController extends GetxController with StateMixin<List<KamarModel>> {
         listKamarKosong =
             listKamarModel.where((e) => e.penghuni!.isEmpty).toList();
         log('${listKamarKosong.length}', name: 'kamar');
+        final listKamar = listKamarModel
+            .where(
+              (element) =>
+                  element.penghuni!.isNotEmpty &&
+                  element.penghuni!.first.id == ConstansApp.idLogin,
+            )
+            .toList();
+        idKamarLogin = listKamar.first.noKamar ?? 'no kosong';
+        log(idKamarLogin!);
         change(listKamarKosong, status: RxStatus.success());
       } else {
         log('Kosong', name: 'kamar');
