@@ -6,12 +6,14 @@ class Routes {
   }
 
   static const DASHBOARD = '/dashboard';
+  static const FORM_PEMBAYARAN = '/form-pembayaran';
   static const HOME = '/home';
+  static const LIST_PEMBAYARAN = '/list-pembayaran';
   static const LOGIN = '/login';
   static const PEMBAYARAN = '/pembayaran';
   static const PROFILE = '/profile';
   static const PROFILE_UPDATE = '/profile-update';
   static const VERIFIKASI = '/verifikasi';
   static const WELCOME = '/welcome';
-  static const FORM_PEMBAYARAN = '/form-pembayaran';
+  static const TENTANG_APP = '/tentang-app';
 }

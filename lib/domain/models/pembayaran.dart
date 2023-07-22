@@ -9,7 +9,7 @@ class PembayaranModel {
   final String jenis;
   final int idr;
   final DocumentReference idKamar;
-  final DocumentReference idAdmin;
+  // final DocumentReference? idPenghuni;
   PembayaranModel({
     this.id,
     required this.dateUpload,
@@ -17,7 +17,7 @@ class PembayaranModel {
     required this.jenis,
     required this.idr,
     required this.idKamar,
-    required this.idAdmin,
+    // required this.idPenghuni,
   });
 
   Map<String, dynamic> toMap() {
@@ -27,7 +27,7 @@ class PembayaranModel {
       'jenis': jenis,
       'idr': idr,
       'idKamar': idKamar,
-      'idAdmin': idAdmin,
+      // 'idPenghuni': idPenghuni,
     };
   }
 
@@ -38,12 +38,12 @@ class PembayaranModel {
           KamarModel.fromDocumentSnapshot(snapshot),
       toFirestore: (value, options) => value.toMap(),
     );
-    final dataLogin = map['idAdmin'] as DocumentReference;
-    DocumentReference<AdminModel> idAdmin = dataLogin.withConverter(
-      fromFirestore: (snapshot, options) =>
-          AdminModel.fromDocumentSnapshot(snapshot),
-      toFirestore: (value, options) => value.toMap(),
-    );
+    // final dataLogin = map['idPenghuni'] as DocumentReference;
+    // DocumentReference<PenghuniModel> idPenghuni = dataLogin.withConverter(
+    //   fromFirestore: (snapshot, options) =>
+    //       PenghuniModel.fromDocumentSnapshot(snapshot),
+    //   toFirestore: (value, options) => value.toMap(),
+    // );
     return PembayaranModel(
       id: id,
       dateUpload: map['dateUpload'] as Timestamp,
@@ -51,7 +51,7 @@ class PembayaranModel {
       jenis: map['jenis'] as String,
       idr: map['idr'] as int,
       idKamar: idKamar,
-      idAdmin: idAdmin,
+      // idPenghuni: map['idPenghuni'] == null ? null : idPenghuni,
     );
   }
 

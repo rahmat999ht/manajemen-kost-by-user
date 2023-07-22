@@ -3,8 +3,9 @@ import '../../../../domain/core/core.dart';
 class DashboardControllerBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<DashboardController>(
-      () => DashboardController(),
+    Get.put<DashboardController>(
+      DashboardController(),
+      permanent: true,
     );
     Get.lazyPut<HomeController>(
       () => HomeController(),
