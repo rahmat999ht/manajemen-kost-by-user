@@ -44,8 +44,6 @@ void main() async {
   );
   FirebaseMessaging messaging = FirebaseMessaging.instance;
 
-  messaging = FirebaseMessaging.instance;
-
   await messaging.requestPermission(
     alert: true,
     announcement: false,
