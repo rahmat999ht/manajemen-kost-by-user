@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import '../../domain/core/core.dart';
 
 class DashboardScreen extends GetView<DashboardController> {
