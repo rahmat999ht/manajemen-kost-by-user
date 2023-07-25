@@ -12,7 +12,7 @@ class ValueRiwayatPembayaran extends GetView<ListPembayaranController> {
 
   @override
   Widget build(BuildContext context) {
-    Get.lazyPut(() => ListPembayaranController());
+    Get.lazyPut<ListPembayaranController>(() => ListPembayaranController());
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
