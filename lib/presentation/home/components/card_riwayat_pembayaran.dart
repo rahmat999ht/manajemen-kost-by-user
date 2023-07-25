@@ -2,19 +2,21 @@ import '../../../../../domain/core/core.dart';
 
 class CardRiwayatPembayaran extends GetView<HomeController> {
   const CardRiwayatPembayaran({
+    
     super.key,
     required this.listData,
     required this.index,
   });
 
-  final List<RiwayatPembayaran> listData;
+  final List<PembayaranModel> listData;
   final int index;
 
   @override
   Widget build(BuildContext context) {
-    final RiwayatPembayaran data = listData[index];
-    final sewaBulanan = controller.formatRupiah('${data.sewaBulanan}');
-    final sewaTahunan = controller.formatRupiah('${data.sewaTahunan}');
+    final PembayaranModel data = listData[index];
+    final jenisPem = data.jenis;
+    final bulan = controller.months[data.dateUpload.toDate().month - 1];
+    final jumlahPem = controller.formatRupiah('${data.idr}');
     return Container(
       margin: EdgeInsets.only(
         left: 12,
@@ -38,54 +40,41 @@ class CardRiwayatPembayaran extends GetView<HomeController> {
         ],
       ),
       child: Center(
-        child: data.isTahunan == false
-            ? Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    'Bulan ${data.bulan}',
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: ColorApp.blackText,
-                    ),
-                  ),
-                  SizeApp.h10,
-                  SizeApp.wFull,
-                  Text(
-                    sewaBulanan,
-                    style: const TextStyle(
-                      fontSize: 13,
-                      color: ColorApp.gray,
-                    ),
-                  ),
-                ],
-              )
-            : Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    'Tahun ${data.tahun}',
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: ColorApp.blackText,
-                    ),
-                  ),
-                  SizeApp.h10,
-                  SizeApp.wFull,
-                  Text(
-                    sewaTahunan,
-                    style: const TextStyle(
-                      fontSize: 13,
-                      color: ColorApp.gray,
-                    ),
-                  ),
-                ],
+          child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Row(
+            children: [
+              Text(
+                jenisPem,
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: ColorApp.blackText,
+                ),
               ),
-      ),
+              const Spacer(),
+              Text(
+                bulan,
+                style: const TextStyle(
+                  fontSize: 13,
+                  color: ColorApp.gray,
+                ),
+              ),
+            ],
+          ),
+          SizeApp.h10,
+          SizeApp.wFull,
+          Text(
+            jumlahPem,
+            style: const TextStyle(
+              fontSize: 13,
+              color: ColorApp.gray,
+            ),
+          ),
+        ],
+      )),
     );
   }
 }

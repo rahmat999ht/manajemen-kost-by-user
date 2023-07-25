@@ -12,8 +12,6 @@ class ListPembayaranScreen extends GetView<ListPembayaranController> {
   const ListPembayaranScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    Get.lazyPut(() => FormPembayaranController());
-    final formC = Get.find<FormPembayaranController>();
     return Scaffold(
       backgroundColor: ColorApp.white,
       appBar: appBarBack('Pembayaran'),
@@ -21,7 +19,7 @@ class ListPembayaranScreen extends GetView<ListPembayaranController> {
         (data) {
           final state = data!
               .where(
-                (e) => e.idKamar.id == formC.dataKamar.first.id,
+                (e) => e.idKamar.id == ConstansApp.idKamarLogin,
               )
               .toList();
           return GroupedListView<PembayaranModel, String>(

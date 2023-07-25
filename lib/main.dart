@@ -66,6 +66,19 @@ void main() async {
   // Set the background messaging handler early on, as a named top-level function
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
+  FirebaseMessaging.onMessage.listen((message) {
+    log('Got a message whilst in the foreground!');
+    log('Message data: ${message.data}');
+
+    if (message.notification != null) {
+      log('Message also contained a notification: ${message.notification?.body ?? "kosong"}');
+      String title = message.notification?.title ?? "Notif";
+      String body = message.notification?.body ?? "kosong";
+      String bodyAnda = body.replaceAll(ConstansApp.idKamarLogin!, 'Anda');
+      Get.snackbar(title, bodyAnda);
+    }
+  });
+
   if (!kIsWeb) {
     channel = const AndroidNotificationChannel(
         'flutter_notification', // id

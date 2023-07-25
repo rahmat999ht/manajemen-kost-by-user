@@ -1,6 +1,8 @@
+import 'package:manajemen_kost_by_user/presentation/home/components/card_riwayat_pembayaran.dart';
+
 import '../../../../../domain/core/core.dart';
 
-class ValueRiwayatPembayaran extends GetView<HomeController> {
+class ValueRiwayatPembayaran extends GetView<ListPembayaranController> {
   const ValueRiwayatPembayaran({
     super.key,
     required this.title,
@@ -10,6 +12,7 @@ class ValueRiwayatPembayaran extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
+    Get.lazyPut(() => ListPembayaranController());
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -26,31 +29,40 @@ class ValueRiwayatPembayaran extends GetView<HomeController> {
           ),
         ),
         controller.obx(
-          (state) => SizedBox(
-            height: 110.0,
-            width: Get.width,
-            child: state!.riwayatPembayaran!.isEmpty
-                ? const Center(
-                    child: Text(
-                      'Riwayat Pembayaran kosong',
-                      style: TextStyle(
-                        color: ColorApp.gray,
-                        fontSize: 18,
+          (state) {
+            final dataPembayaranKamarINI = state!
+                .where(
+                  (e) => e.idKamar.id == ConstansApp.idKamarLogin,
+                )
+                .toList();
+            return Center(
+              child: SizedBox(
+                height: 110.0,
+                width: Get.width,
+                child: dataPembayaranKamarINI.isEmpty
+                    ? const Center(
+                        child: Text(
+                          'Riwayat Pembayaran kosong',
+                          style: TextStyle(
+                            color: ColorApp.gray,
+                            fontSize: 18,
+                          ),
+                        ),
+                      )
+                    : ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        shrinkWrap: true,
+                        itemCount: dataPembayaranKamarINI.length,
+                        itemBuilder: (context, index) {
+                          return CardRiwayatPembayaran(
+                            listData: dataPembayaranKamarINI,
+                            index: index,
+                          );
+                        },
                       ),
-                    ),
-                  )
-                : ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    shrinkWrap: true,
-                    itemCount: state.riwayatPembayaran!.length,
-                    itemBuilder: (context, index) {
-                      return CardRiwayatPembayaran(
-                        listData: state.riwayatPembayaran!,
-                        index: index,
-                      );
-                    },
-                  ),
-          ),
+              ),
+            );
+          },
           onEmpty: const Center(child: Text("Masih Kosong")),
           onLoading: const SizedBox(height: 130, child: LoadingState()),
           onError: (e) {

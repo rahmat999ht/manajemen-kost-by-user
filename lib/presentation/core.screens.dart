@@ -10,7 +10,6 @@ export 'home/components/call_by_alert.dart';
 export 'home/components/card_kamar_kosong.dart';
 export 'home/components/card_naive_bayes.dart';
 export 'home/components/card_penjaga_kost.dart';
-export 'home/components/card_riwayat_pembayaran.dart';
 export 'home/components/header_home.dart';
 export 'home/components/value_kamar_kosong.dart';
 export 'home/components/value_naive_bayes.dart';

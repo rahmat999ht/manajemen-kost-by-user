@@ -8,12 +8,10 @@ class FormPembayaranScreen extends GetView<FormPembayaranController> {
   @override
   Widget build(BuildContext context) {
     Get.lazyPut(() => ImagesPembayaranController());
+    Get.lazyPut(() => FormPembayaranController());
     return Scaffold(
       backgroundColor: ColorApp.white,
-      appBar: appBarBatal(
-        'Pembayaran',
-        Get.back,
-      ),
+      appBar: appBarBatal('Pembayaran', Get.back),
       body: Padding(
         padding: const EdgeInsets.all(18.0),
         child: Form(
