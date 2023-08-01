@@ -52,10 +52,9 @@ class ProfileUpdateController extends GetxController {
           log('masuk');
           log(' image : ${dataImage.imageFileList.length}');
           if (dataImage.imageFileList.isNotEmpty) {
-            final foto = await methodApp.uploadWithImage(
+            final foto = await methodApp.uploadImageProfil(
               File(dataImage.imageFileList.first.path),
               "${ConstansApp.idLogin}_${DateTime.now().toIso8601String()}",
-              profil: true,
             );
             log('masuk 1 ${dataImage.imageFileList.length}');
             log(penghuniModel.id!);

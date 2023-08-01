@@ -73,7 +73,7 @@ class MethodApp {
         .add(data!);
   }
 
-   void updatePemberitahuanById({
+  void updatePemberitahuanById({
     String? id,
     Map<String, dynamic>? data,
   }) {
@@ -84,7 +84,6 @@ class MethodApp {
           data!,
         );
   }
-
 
   DocumentReference<PenghuniModel> penghuni(String idUser) {
     return ConstansApp.firebaseFirestore
@@ -133,14 +132,29 @@ class MethodApp {
     return blurHash.hash;
   }
 
-  Future<ImageHash> uploadWithImage(
+  Future<ImageHash> uploadImagePemasukan(
     File file,
-    String uniqName, {
-    bool pemasukan = true,
-    bool profil = false,
-  }) async {
-    final String folder = pemasukan == true ? 'pemasukan' : 'pengeluaran';
-    final String initFolder = profil == true ? 'profil' : folder;
+    String uniqName,
+  ) async {
+    String initFolder = 'pemasukan';
+    final uploadTask =
+        await ConstansApp.storageRef.child("$initFolder/$uniqName.jpg").putFile(
+              file,
+              ConstansApp.metadata,
+            );
+    final String urlImage = await uploadTask.ref.getDownloadURL();
+
+    return ImageHash(
+      imageHash: blurImage(file),
+      imageUrl: urlImage,
+    );
+  }
+
+  Future<ImageHash> uploadImageProfil(
+    File file,
+    String uniqName,
+  ) async {
+    String initFolder = 'profil';
     final uploadTask =
         await ConstansApp.storageRef.child("$initFolder/$uniqName.jpg").putFile(
               file,

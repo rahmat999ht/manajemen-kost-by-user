@@ -1,4 +1,5 @@
 import '../../../../../domain/core/core.dart';
+import 'detail_kamar.dart';
 
 class CardNaiveBayes extends GetView<HomeController> {
   const CardNaiveBayes({
@@ -34,12 +35,11 @@ class CardNaiveBayes extends GetView<HomeController> {
 
                 return GestureDetector(
                   onTap: () {
-                    // Get.to(
-                    //   DetailKamar(
-                    //     kamarModel: data,
-                    //     naiveBayesModel: jatuhTempoModel,
-                    //   ),
-                    // );
+                    Get.to(
+                      DetailKamar(
+                        naiveBayesModel: naiveBayesModel,
+                      ),
+                    );
                   },
                   child: Container(
                     margin: const EdgeInsets.all(16),
@@ -71,6 +71,7 @@ class CardNaiveBayes extends GetView<HomeController> {
                             imageHash: dataPenghuni.image,
                             width: 107,
                             height: dataPenghuni.image != null ? 189 : 100,
+                            radius: 10,
                           ),
                         ),
                         Column(

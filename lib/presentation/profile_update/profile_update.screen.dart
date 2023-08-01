@@ -12,7 +12,6 @@ class ProfileUpdateScreen extends GetView<ProfileUpdateController> {
       appBar: appBarBatal('Edit profil', Get.back),
       body: SingleChildScrollView(
         child: SizedBox(
-          height: Get.height,
           child: Form(
             key: controller.formKey,
             child: Padding(
@@ -33,6 +32,7 @@ class ProfileUpdateScreen extends GetView<ProfileUpdateController> {
                       onPressed: controller.updateProfil,
                     ),
                   ),
+                  SizeApp.h30,
                 ],
               ),
             ),

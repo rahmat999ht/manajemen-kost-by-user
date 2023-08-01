@@ -51,7 +51,7 @@ class FormPembayaranController extends GetxController
         log(fixIdr);
         if (dataImage.imageFileList.isNotEmpty) {
           loadingState();
-          final foto = await methodApp.uploadWithImage(
+          final foto = await methodApp.uploadImagePemasukan(
             File(dataImage.imageFileList.first.path),
             "${ConstansApp.idLogin}_${DateTime.now().toIso8601String()}",
           );
