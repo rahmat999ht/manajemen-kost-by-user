@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:manajemen_kost_by_user/domain/core/core.dart';
@@ -30,7 +31,18 @@ class DashboardController extends GetxController
 
     var dataUserModel = dataAllUser.docs.firstWhere((e) => e.id == isId);
     penghuniModel = PenghuniModel.fromDocumentSnapshot(dataUserModel);
+
     successState(penghuniModel!);
+
+    Timer.periodic(const Duration(seconds: 3), (timer) {
+      log(penghuniModel!.isAktif.toString());
+      if (penghuniModel!.isAktif == false) {
+        log('logout');
+        logOut();
+        timer.cancel();
+      }
+    });
+
     if (Get.arguments != null) {
       selectedIndex.value = Get.arguments["selectedIndex"] ?? 0;
     }
@@ -53,5 +65,14 @@ class DashboardController extends GetxController
       penghuniModel,
       status: RxStatus.success(),
     );
+  }
+
+  Future logOut() async {
+    await FirebaseAuth.instance.signOut();
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString("user_id", 'id');
+    String? isId = prefs.getString("user_id") ?? 'id';
+    log(isId);
+    Get.offAllNamed(Routes.LOGIN);
   }
 }

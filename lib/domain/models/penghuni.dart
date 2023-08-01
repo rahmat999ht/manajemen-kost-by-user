@@ -27,8 +27,6 @@ class PenghuniModel {
       'noHp': noHp,
       'jkl': jkl,
       'status': status,
-      'peran': peran,
-      'isAktif': isAktif,
     };
   }
 

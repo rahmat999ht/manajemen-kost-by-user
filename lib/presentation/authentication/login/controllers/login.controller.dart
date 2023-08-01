@@ -26,6 +26,10 @@ class LoginController extends GetxController {
               "peran",
               isEqualTo: 'PJ',
             )
+            .where(
+              "isAktif",
+              isEqualTo: true,
+            )
             .get();
         log("message");
         if (dataUser.size == 0) {
