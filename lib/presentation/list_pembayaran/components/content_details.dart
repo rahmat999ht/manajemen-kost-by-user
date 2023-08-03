@@ -45,6 +45,19 @@ Padding content(
                   ),
                 ),
               ),
+            if (value == 'Sewa 1 Tahun' || value == 'Sewa 1 Bulan')
+              const SizedBox(
+                height: 16,
+                width: 16,
+                child: CircleAvatar(
+                  backgroundColor: ColorApp.gray,
+                  child: Icon(
+                    Icons.home,
+                    color: ColorApp.white,
+                    size: 12,
+                  ),
+                ),
+              ),
             SizeApp.w6,
             Text(
               value,

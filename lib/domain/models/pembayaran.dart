@@ -27,7 +27,6 @@ class PembayaranModel {
       'jenis': jenis,
       'idr': idr,
       'idKamar': idKamar,
-      // 'idPenghuni': idPenghuni,
     };
   }
 
@@ -38,12 +37,6 @@ class PembayaranModel {
           KamarModel.fromDocumentSnapshot(snapshot),
       toFirestore: (value, options) => value.toMap(),
     );
-    // final dataLogin = map['idPenghuni'] as DocumentReference;
-    // DocumentReference<PenghuniModel> idPenghuni = dataLogin.withConverter(
-    //   fromFirestore: (snapshot, options) =>
-    //       PenghuniModel.fromDocumentSnapshot(snapshot),
-    //   toFirestore: (value, options) => value.toMap(),
-    // );
     return PembayaranModel(
       id: id,
       dateUpload: map['dateUpload'] as Timestamp,
@@ -53,7 +46,6 @@ class PembayaranModel {
       jenis: map['jenis'] as String,
       idr: map['idr'] as int,
       idKamar: idKamar,
-      // idPenghuni: map['idPenghuni'] == null ? null : idPenghuni,
     );
   }
 

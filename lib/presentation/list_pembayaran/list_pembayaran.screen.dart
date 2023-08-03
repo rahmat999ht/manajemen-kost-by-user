@@ -2,7 +2,7 @@ import 'dart:developer';
 
 // import 'package:grouped_list/grouped_list.dart';
 import 'package:grouped_list/grouped_list.dart';
-import 'package:manajemen_kost_by_user/presentation/list_pembayaran/components/detail_pemasukan.dart';
+import 'package:manajemen_kost_by_user/presentation/list_pembayaran/components/detail_pembayaran.dart';
 import 'package:manajemen_kost_by_user/presentation/list_pembayaran/components/value_grub.dart';
 import 'package:manajemen_kost_by_user/presentation/profile/components/grub_separator.dart';
 
@@ -63,8 +63,6 @@ class RekapanPemasukanBulanan extends GetView<ListPembayaranController> {
 
   @override
   Widget build(BuildContext context) {
-    Get.lazyPut(() => FormPembayaranController());
-    final formC = Get.find<FormPembayaranController>();
     return Scaffold(
       backgroundColor: ColorApp.white,
       appBar: appBarBack('Rekapan $title'),
@@ -72,10 +70,11 @@ class RekapanPemasukanBulanan extends GetView<ListPembayaranController> {
         (dataP) {
           final state = dataP!
               .where(
-                (e) => e.idKamar.id == formC.dataKamar.first.id,
+                (e) => e.idKamar.id == ConstansApp.idKamarLogin,
               )
               .toList();
           final threeDigits = controller.threeDigits(title);
+          log(threeDigits);
           int monthNumber = -1;
           for (int i = 0; i < controller.listNameMonth.length; i++) {
             if (controller.listNameMonth[i].startsWith(threeDigits)) {
@@ -87,13 +86,12 @@ class RekapanPemasukanBulanan extends GetView<ListPembayaranController> {
             return e.dateUpload.toDate().month == monthNumber;
           }).toList();
           int valueTotalBulanan = 0;
-          // for (int i = 0; i < data.length; i++) {
           for (var e in data) {
             final bulanan = e.idr;
             valueTotalBulanan = valueTotalBulanan + bulanan;
           }
           final totalBulanan = controller.formatRupiah("$valueTotalBulanan");
-          // }
+
           return Column(
             children: [
               Expanded(
